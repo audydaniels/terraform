@@ -35,16 +35,16 @@ resource "aws_security_group" "instance" {
 }
 
 resource "aws_launch_configuration" "example" {
-  image_id       = "ami-0a91cd140a1fc148a"
-  instance_type  = "t2.micro"
-  security_groups = "${aws_secuirty_group.intance.id}"
-  user_data      = << EOF
-  		   #!/bin/bash
-   		   echo "Hello, World"> index.html
-  		   nohup busybox httpd -f -p "${var.server_port}" &
-  		   EOF
+  image_id        = "ami-0a91cd140a1fc148a"
+  instance_type   = "t2.micro"
+  security_groups = ["${aws_security_group.instance.id}"]
+  user_data       = <<-EOF
+  		    #!/bin/bash
+   		    echo "Hello, World"> index.html
+  		    nohup busybox httpd -f -p "${var.server_port}" &
+  		    EOF
   lifecycle {
-    create_before_destry = true 
+    create_before_destroy = true 
   }
 }
 
