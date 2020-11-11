@@ -1,14 +1,7 @@
 provider "aws" {
-  region = "us-east-2"
-}
-variable "server_port" {
-  description = "The port the server will use for HTTP requestes"
-  default     = 8080
+  region = var.aws_region
 }
 
-output "public_ip" {
-  value = "${aws_instance.example.public_ip}"
-}
 resource "aws_instance" "example" {
   ami 		= "ami-0a91cd140a1fc148a"
   instance_type = "t2.micro"
