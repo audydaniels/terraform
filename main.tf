@@ -49,7 +49,7 @@ resource "aws_autoscaling_group" "example" {
   availability_zones   = ["{data.aws_availability_zones.all.names}"]  
   
   load_balancers       = ["${aws_elb.example.id}"]  
-  health_check_type    = "ELB"
+  health_check_type    = "ELB" #This tells the ASG to use the ELB's health check to determine if instance is healthy
 
   min_size = 2
   max_size = 10

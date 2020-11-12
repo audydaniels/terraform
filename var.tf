@@ -26,3 +26,8 @@ variable "elb_port" {
   description	= "Elastic Loadbalancer inbound and outbound port"
   default 	= 80
 }
+
+output "elb_dns_name" {
+  description	= "Display ELB DNS name after code has run"
+  value		= "${aws_elb.example.dns_name}" #This will output the DNS of the ELB
+}
