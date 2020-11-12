@@ -46,7 +46,7 @@ resource "aws_launch_configuration" "example" {
 
 resource "aws_autoscaling_group" "example" {
   launch_configuration = "${aws_launch_configuration.example.id}"
-  availability_zones   = ["{data.aws_availability_zones.all.names}"]  
+  availability_zones   = "${data.aws_availability_zones.all.zone_ids}"  
   
   load_balancers       = ["${aws_elb.example.id}"]  
   health_check_type    = "ELB" #This tells the ASG to use the ELB's health check to determine if instance is healthy
@@ -63,7 +63,7 @@ resource "aws_autoscaling_group" "example" {
 
 resource "aws_elb" "example" {
   name		     = "terraform-asg-example"
-  availability_zones = ["{data.aws_avialability_zones.all.names}"]
+  availability_zones = "${data.aws_availability_zones.all.zone_ids}"
   security_groups    = ["{aws_security_group.elb_sg.id}"]
   
   listener {

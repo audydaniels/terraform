@@ -1,6 +1,8 @@
 
 	# Fetches all the AZ from AWS
-data "aws_availability_zones" "all" {}
+data "aws_availability_zones" "all" {
+  all_availability_zones = true
+}
 
 variable "aws_region" {
   description = "Sets the AWS Region"
